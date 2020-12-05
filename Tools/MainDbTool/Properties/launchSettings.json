@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "MainDbTool": {
+      "commandName": "Project",
+      "commandLineArgs": "--Command=update",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
