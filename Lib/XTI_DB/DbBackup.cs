@@ -16,7 +16,7 @@ namespace XTI_DB
         public Task Run(XtiDbName dbName, string backupFilePath)
         {
             FormattableString commandText =
-                $"BACKUP DATABASE {dbName} TO DISK = {backupFilePath}";
+                $"BACKUP DATABASE {dbName.Value} TO DISK = {backupFilePath}";
             return dbContext.Database.ExecuteSqlInterpolatedAsync(commandText);
         }
     }

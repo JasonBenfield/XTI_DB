@@ -26,15 +26,15 @@ namespace XTI_DB
             var backupLogFile = backupFiles.First(f => f.IsLog);
             await dbContext.Database.ExecuteSqlRawAsync
             (
-                $"USE [master]\r\nalter database {dbName} set single_user with rollback immediate"
+                $"USE [master]\r\nalter database {dbName.Value} set single_user with rollback immediate"
             );
             await dbContext.Database.ExecuteSqlRawAsync
             (
-                $"USE [master]\r\nRESTORE DATABASE {dbName} FROM DISK = '{backupFilePath}' WITH MOVE '{backupDataFile.LogicalName}' TO '{currentDataFile.PhysicalName}',  MOVE '{backupLogFile.LogicalName}' TO '{currentLogFile.PhysicalName}',  NOUNLOAD, REPLACE"
+                $"USE [master]\r\nRESTORE DATABASE {dbName.Value} FROM DISK = '{backupFilePath}' WITH MOVE '{backupDataFile.LogicalName}' TO '{currentDataFile.PhysicalName}',  MOVE '{backupLogFile.LogicalName}' TO '{currentLogFile.PhysicalName}',  NOUNLOAD, REPLACE"
             );
             await dbContext.Database.ExecuteSqlRawAsync
             (
-                $"USE [master]\r\nalter database {dbName} set multi_user"
+                $"USE [master]\r\nalter database {dbName.Value} set multi_user"
             );
         }
 
