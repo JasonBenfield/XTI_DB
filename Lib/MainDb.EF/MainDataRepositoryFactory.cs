@@ -1,43 +1,60 @@
 ﻿using MainDB.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using XTI_Core;
 using XTI_Core.EF;
 
 namespace MainDB.EF
 {
-    public sealed class MainDataRepositoryFactory : DataRepositoryFactory
+    public sealed class MainDataRepositoryFactory : IMainDataRepositoryFactory
     {
+        private readonly MainDbContext mainDbContext;
+        private readonly UnitOfWork unitOfWork;
+
         public MainDataRepositoryFactory(MainDbContext mainDbContext)
         {
             this.mainDbContext = mainDbContext;
             unitOfWork = new UnitOfWork(mainDbContext);
-            dbSetLookup = new Dictionary<Type, object>
-            {
-                { typeof(AppEventRecord), mainDbContext.Events },
-                { typeof(AppRecord), mainDbContext.Apps },
-                { typeof(AppRequestRecord), mainDbContext.Requests },
-                { typeof(AppRoleRecord), mainDbContext.Roles },
-                { typeof(AppSessionRecord), mainDbContext.Sessions },
-                { typeof(AppUserModifierRecord), mainDbContext.UserModifiers },
-                { typeof(AppUserRecord), mainDbContext.Users },
-                { typeof(AppUserRoleRecord), mainDbContext.UserRoles },
-                { typeof(AppVersionRecord), mainDbContext.Versions },
-                { typeof(ModifierCategoryAdminRecord), mainDbContext.ModifierCategoryAdmins },
-                { typeof(ModifierCategoryRecord), mainDbContext.ModifierCategories },
-                { typeof(ModifierRecord), mainDbContext.Modifiers },
-                { typeof(ResourceGroupRecord), mainDbContext.ResourceGroups },
-                { typeof(ResourceRecord), mainDbContext.Resources }
-            };
         }
 
-        private readonly MainDbContext mainDbContext;
-        private readonly UnitOfWork unitOfWork;
+        public DataRepository<AppUserRecord> CreateUsers()
+            => new EfDataRepository<AppUserRecord>(unitOfWork, mainDbContext, mainDbContext.Users);
 
-        private readonly Dictionary<Type, object> dbSetLookup;
+        public DataRepository<AppSessionRecord> CreateSessions()
+            => new EfDataRepository<AppSessionRecord>(unitOfWork, mainDbContext, mainDbContext.Sessions);
 
-        public DataRepository<T> Create<T>() where T : class
-            => new EfDataRepository<T>(unitOfWork, mainDbContext, (DbSet<T>)dbSetLookup[typeof(T)]);
+        public DataRepository<AppRequestRecord> CreateRequests()
+            => new EfDataRepository<AppRequestRecord>(unitOfWork, mainDbContext, mainDbContext.Requests);
+
+        public DataRepository<AppEventRecord> CreateEvents()
+            => new EfDataRepository<AppEventRecord>(unitOfWork, mainDbContext, mainDbContext.Events);
+
+        public DataRepository<AppRecord> CreateApps()
+            => new EfDataRepository<AppRecord>(unitOfWork, mainDbContext, mainDbContext.Apps);
+
+        public DataRepository<AppVersionRecord> CreateVersions()
+            => new EfDataRepository<AppVersionRecord>(unitOfWork, mainDbContext, mainDbContext.Versions);
+
+        public DataRepository<AppRoleRecord> CreateRoles()
+            => new EfDataRepository<AppRoleRecord>(unitOfWork, mainDbContext, mainDbContext.Roles);
+
+        public DataRepository<AppUserRoleRecord> CreateUserRoles()
+            => new EfDataRepository<AppUserRoleRecord>(unitOfWork, mainDbContext, mainDbContext.UserRoles);
+
+        public DataRepository<ResourceGroupRecord> CreateResourceGroups()
+            => new EfDataRepository<ResourceGroupRecord>(unitOfWork, mainDbContext, mainDbContext.ResourceGroups);
+
+        public DataRepository<ResourceRecord> CreateResources()
+            => new EfDataRepository<ResourceRecord>(unitOfWork, mainDbContext, mainDbContext.Resources);
+
+        public DataRepository<ModifierCategoryRecord> CreateModifierCategories()
+            => new EfDataRepository<ModifierCategoryRecord>(unitOfWork, mainDbContext, mainDbContext.ModifierCategories);
+
+        public DataRepository<ModifierCategoryAdminRecord> CreateModifierCategoryAdmins()
+            => new EfDataRepository<ModifierCategoryAdminRecord>(unitOfWork, mainDbContext, mainDbContext.ModifierCategoryAdmins);
+
+        public DataRepository<ModifierRecord> CreateModifiers()
+            => new EfDataRepository<ModifierRecord>(unitOfWork, mainDbContext, mainDbContext.Modifiers);
+
+        public DataRepository<AppUserModifierRecord> CreateUserModifiers()
+            => new EfDataRepository<AppUserModifierRecord>(unitOfWork, mainDbContext, mainDbContext.UserModifiers);
     }
 }
