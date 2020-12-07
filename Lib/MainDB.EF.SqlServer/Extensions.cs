@@ -1,4 +1,5 @@
 ﻿using MainDB.EF;
+using MainDB.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,7 @@ namespace MainDB.Extensions
                     options.EnableSensitiveDataLogging(false);
                 }
             });
+            services.AddScoped<IMainDataRepositoryFactory, MainDataRepositoryFactory>();
         }
     }
 }
