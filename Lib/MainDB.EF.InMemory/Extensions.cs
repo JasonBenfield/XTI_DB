@@ -1,4 +1,5 @@
 ﻿using MainDB.EF;
+using MainDB.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +16,7 @@ namespace MainDB.Extensions
                     .UseInMemoryDatabase(Guid.NewGuid().ToString())
                     .EnableSensitiveDataLogging();
             });
+            services.AddScoped<IMainDataRepositoryFactory, MainDataRepositoryFactory>();
         }
     }
 }
