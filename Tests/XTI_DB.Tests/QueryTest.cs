@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using XTI_Configuration.Extensions;
+using XTI_Core;
 
 namespace XTI_DB.Tests
 {
