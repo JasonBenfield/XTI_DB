@@ -1,5 +1,4 @@
 ﻿using System;
-using XTI_Core;
 
 namespace MainDB.Entities
 {
@@ -12,6 +11,6 @@ namespace MainDB.Entities
         public string Caption { get; set; } = "";
         public string Message { get; set; } = "";
         public string Detail { get; set; } = "";
-        public DateTime TimeOccurred { get; set; } = Timestamp.MaxValue.Value;
+        public DateTimeOffset TimeOccurred { get; set; } = DateTimeOffset.MaxValue;
     }
 }

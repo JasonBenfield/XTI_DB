@@ -1,5 +1,4 @@
 ﻿using System;
-using XTI_Core;
 
 namespace MainDB.Entities
 {
@@ -9,8 +8,8 @@ namespace MainDB.Entities
         public string SessionKey { get; set; } = "";
         public int UserID { get; set; }
         public string RequesterKey { get; set; } = "";
-        public DateTime TimeStarted { get; set; } = Timestamp.MinValue.Value;
-        public DateTime TimeEnded { get; set; } = Timestamp.MaxValue.Value;
+        public DateTimeOffset TimeStarted { get; set; } = DateTimeOffset.MinValue;
+        public DateTimeOffset TimeEnded { get; set; } = DateTimeOffset.MaxValue;
         public string RemoteAddress { get; set; } = "";
         public string UserAgent { get; set; } = "";
     }
