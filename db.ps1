@@ -40,6 +40,14 @@ function DB-New-XtiVersion {
     $script:dbConfig | New-XtiVersion @PsBoundParameters
 }
 
+function DB-Xti-Merge {
+    param(
+        [Parameter(Position=0)]
+        [string] $CommitMessage
+    )
+    $script:dbConfig | Xti-Merge @PsBoundParameters
+}
+
 function DB-New-XtiPullRequest {
     param(
         [Parameter(Position=0)]
@@ -59,4 +67,7 @@ function DB-Publish {
         [switch] $Prod
     )
     $script:dbConfig | Xti-PublishPackage @PsBoundParameters
+    if($Prod) {
+        $script:dbConfig | Xti-Merge
+    }
 }

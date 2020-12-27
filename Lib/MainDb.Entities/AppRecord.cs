@@ -8,6 +8,6 @@ namespace MainDB.Entities
         public int Type { get; set; }
         public string Name { get; set; } = "xti_notfound";
         public string Title { get; set; } = "";
-        public DateTime TimeAdded { get; set; }
+        public DateTimeOffset TimeAdded { get; set; } = DateTimeOffset.MaxValue;
     }
 }

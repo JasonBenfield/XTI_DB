@@ -1,5 +1,4 @@
 ﻿using System;
-using XTI_Core;
 
 namespace MainDB.Entities
 {
@@ -12,7 +11,7 @@ namespace MainDB.Entities
         public string Path { get; set; } = "";
         public int ResourceID { get; set; }
         public int ModifierID { get; set; }
-        public DateTime TimeStarted { get; set; } = Timestamp.MinValue.Value;
-        public DateTime TimeEnded { get; set; } = Timestamp.MaxValue.Value;
+        public DateTimeOffset TimeStarted { get; set; } = DateTimeOffset.MinValue;
+        public DateTimeOffset TimeEnded { get; set; } = DateTimeOffset.MaxValue;
     }
 }

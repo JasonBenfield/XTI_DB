@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MainDB.Entities;
+using XTI_DB;
 
 namespace MainDB.EF
 {
@@ -26,6 +27,7 @@ namespace MainDB.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.AddIsInTimeRange();
             modelBuilder.ApplyConfiguration(new AppUserEntityConfiguration());
             modelBuilder.ApplyConfiguration(new AppSessionEntityConfiguration());
             modelBuilder.ApplyConfiguration(new AppRequestEntityConfiguration());
