@@ -1,4 +1,6 @@
-﻿using XTI_Core;
+﻿using System;
+using System.Threading.Tasks;
+using XTI_Core;
 
 namespace MainDB.Entities
 {
@@ -20,5 +22,6 @@ namespace MainDB.Entities
         DataRepository<ModifierCategoryAdminRecord> CreateModifierCategoryAdmins();
         DataRepository<ModifierRecord> CreateModifiers();
         DataRepository<AppUserModifierRecord> CreateUserModifiers();
+        Task Transaction(Func<Task> action);
     }
 }

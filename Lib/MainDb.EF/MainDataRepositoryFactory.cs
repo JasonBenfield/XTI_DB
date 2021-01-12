@@ -1,4 +1,6 @@
 ﻿using MainDB.Entities;
+using System;
+using System.Threading.Tasks;
 using XTI_Core;
 using XTI_Core.EF;
 
@@ -62,6 +64,8 @@ namespace MainDB.EF
 
         public DataRepository<AppUserModifierRecord> CreateUserModifiers()
             => new EfDataRepository<AppUserModifierRecord>(unitOfWork, mainDbContext, mainDbContext.UserModifiers);
+
+        public Task Transaction(Func<Task> action) => unitOfWork.Execute(action);
 
     }
 }
