@@ -13,7 +13,9 @@ namespace MainDB.Entities
         DataRepository<AppRoleRecord> CreateRoles();
         DataRepository<AppUserRoleRecord> CreateUserRoles();
         DataRepository<ResourceGroupRecord> CreateResourceGroups();
+        DataRepository<ResourceGroupRoleRecord> CreateResourceGroupRoles();
         DataRepository<ResourceRecord> CreateResources();
+        DataRepository<ResourceRoleRecord> CreateResourceRoles();
         DataRepository<ModifierCategoryRecord> CreateModifierCategories();
         DataRepository<ModifierCategoryAdminRecord> CreateModifierCategoryAdmins();
         DataRepository<ModifierRecord> CreateModifiers();

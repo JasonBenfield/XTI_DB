@@ -4,14 +4,16 @@ using MainDB.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MainDB.EF.SqlServer
 {
     [DbContext(typeof(MainDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210112020513_AddResourceGroupRolesAndResourceRoles")]
+    partial class AddResourceGroupRolesAndResourceRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -420,6 +422,9 @@ namespace MainDB.EF.SqlServer
                     b.Property<int>("AppID")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsAnonymousAllowed")
+                        .HasColumnType("bit");
+
                     b.Property<int>("ModCategoryID")
                         .HasColumnType("int");
 
@@ -438,6 +443,32 @@ namespace MainDB.EF.SqlServer
                     b.ToTable("ResourceGroups");
                 });
 
+            modelBuilder.Entity("MainDB.Entities.ResourceGroupRoleRecord", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("GroupID")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsAllowed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RoleID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("RoleID");
+
+                    b.HasIndex("GroupID", "RoleID")
+                        .IsUnique();
+
+                    b.ToTable("ResourceGroupRoles");
+                });
+
             modelBuilder.Entity("MainDB.Entities.ResourceRecord", b =>
                 {
                     b.Property<int>("ID")
@@ -447,6 +478,9 @@ namespace MainDB.EF.SqlServer
 
                     b.Property<int>("GroupID")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsAnonymousAllowed")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100)
@@ -459,6 +493,32 @@ namespace MainDB.EF.SqlServer
                         .HasFilter("[Name] IS NOT NULL");
 
                     b.ToTable("Resources");
+                });
+
+            modelBuilder.Entity("MainDB.Entities.ResourceRoleRecord", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<bool>("IsAllowed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ResourceID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("RoleID");
+
+                    b.HasIndex("ResourceID", "RoleID")
+                        .IsUnique();
+
+                    b.ToTable("ResourceRoles");
                 });
 
             modelBuilder.Entity("MainDB.Entities.AppEventRecord", b =>
@@ -602,11 +662,41 @@ namespace MainDB.EF.SqlServer
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MainDB.Entities.ResourceGroupRoleRecord", b =>
+                {
+                    b.HasOne("MainDB.Entities.ResourceGroupRecord", null)
+                        .WithMany()
+                        .HasForeignKey("GroupID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MainDB.Entities.AppRoleRecord", null)
+                        .WithMany()
+                        .HasForeignKey("RoleID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("MainDB.Entities.ResourceRecord", b =>
                 {
                     b.HasOne("MainDB.Entities.ResourceGroupRecord", null)
                         .WithMany()
                         .HasForeignKey("GroupID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MainDB.Entities.ResourceRoleRecord", b =>
+                {
+                    b.HasOne("MainDB.Entities.ResourceRecord", null)
+                        .WithMany()
+                        .HasForeignKey("ResourceID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MainDB.Entities.AppRoleRecord", null)
+                        .WithMany()
+                        .HasForeignKey("RoleID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

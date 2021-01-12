@@ -32,8 +32,8 @@ namespace MainDbTool
                     {
                         throw new ArgumentException("Database reset can only be run for the test environment");
                     }
-                    var appDbReset = scope.ServiceProvider.GetService<MainDbReset>();
-                    await appDbReset.Run();
+                    var mainDbReset = scope.ServiceProvider.GetService<MainDbReset>();
+                    await mainDbReset.Run();
                 }
                 else if (options.Command == "backup")
                 {
@@ -41,8 +41,8 @@ namespace MainDbTool
                     {
                         throw new ArgumentException("Backup file path is required for backup");
                     }
-                    var appDbBackup = scope.ServiceProvider.GetService<MainDbBackup>();
-                    await appDbBackup.Run(hostEnvironment.EnvironmentName, options.BackupFilePath);
+                    var mainDbBackup = scope.ServiceProvider.GetService<MainDbBackup>();
+                    await mainDbBackup.Run(hostEnvironment.EnvironmentName, options.BackupFilePath);
                 }
                 else if (options.Command == "restore")
                 {
@@ -54,13 +54,13 @@ namespace MainDbTool
                     {
                         throw new ArgumentException("Backup file path is required for restore");
                     }
-                    var appDbRestore = scope.ServiceProvider.GetService<MainDbRestore>();
-                    await appDbRestore.Run(hostEnvironment.EnvironmentName, options.BackupFilePath);
+                    var mainDbRestore = scope.ServiceProvider.GetService<MainDbRestore>();
+                    await mainDbRestore.Run(hostEnvironment.EnvironmentName, options.BackupFilePath);
                 }
                 else if (options.Command == "update")
                 {
-                    var appDbContext = scope.ServiceProvider.GetService<MainDbContext>();
-                    await appDbContext.Database.MigrateAsync();
+                    var mainDbContext = scope.ServiceProvider.GetService<MainDbContext>();
+                    await mainDbContext.Database.MigrateAsync();
                 }
                 else
                 {

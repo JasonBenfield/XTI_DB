@@ -51,7 +51,7 @@ namespace MainDB.EF.SqlServer
                         .HasColumnType("int");
 
                     b.Property<DateTime>("TimeOccurred")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("ID");
 
@@ -76,7 +76,7 @@ namespace MainDB.EF.SqlServer
                         .HasMaxLength(50);
 
                     b.Property<DateTime>("TimeAdded")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Title")
                         .ValueGeneratedOnAdd()
@@ -121,10 +121,10 @@ namespace MainDB.EF.SqlServer
                         .HasColumnType("int");
 
                     b.Property<DateTime>("TimeEnded")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<DateTime>("TimeStarted")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("VersionID")
                         .HasColumnType("int");
@@ -189,10 +189,10 @@ namespace MainDB.EF.SqlServer
                         .HasMaxLength(100);
 
                     b.Property<DateTime>("TimeEnded")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<DateTime>("TimeStarted")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("UserAgent")
                         .HasColumnType("nvarchar(1000)")
@@ -246,7 +246,7 @@ namespace MainDB.EF.SqlServer
                         .HasMaxLength(100);
 
                     b.Property<DateTime>("TimeAdded")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(100)")
@@ -309,7 +309,7 @@ namespace MainDB.EF.SqlServer
                         .HasColumnType("int");
 
                     b.Property<DateTime>("TimeAdded")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");

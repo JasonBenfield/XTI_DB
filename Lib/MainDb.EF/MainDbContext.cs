@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MainDB.Entities;
-using XTI_DB;
+﻿using MainDB.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace MainDB.EF
 {
@@ -18,7 +17,9 @@ namespace MainDB.EF
             Roles = Set<AppRoleRecord>();
             UserRoles = Set<AppUserRoleRecord>();
             ResourceGroups = Set<ResourceGroupRecord>();
+            ResourceGroupRoles = Set<ResourceGroupRoleRecord>();
             Resources = Set<ResourceRecord>();
+            ResourceRoles = Set<ResourceRoleRecord>();
             ModifierCategories = Set<ModifierCategoryRecord>();
             ModifierCategoryAdmins = Set<ModifierCategoryAdminRecord>();
             Modifiers = Set<ModifierRecord>();
@@ -27,7 +28,6 @@ namespace MainDB.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.AddIsInTimeRange();
             modelBuilder.ApplyConfiguration(new AppUserEntityConfiguration());
             modelBuilder.ApplyConfiguration(new AppSessionEntityConfiguration());
             modelBuilder.ApplyConfiguration(new AppRequestEntityConfiguration());
@@ -37,7 +37,9 @@ namespace MainDB.EF
             modelBuilder.ApplyConfiguration(new AppRoleEntityConfiguration());
             modelBuilder.ApplyConfiguration(new AppUserRoleEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceGroupEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ResourceGroupRoleEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ResourceRoleEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ModifierCategoryEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ModifierCategoryAdminEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ModifierEntityConfiguration());
@@ -54,7 +56,9 @@ namespace MainDB.EF
         public DbSet<AppRoleRecord> Roles { get; }
         public DbSet<AppUserRoleRecord> UserRoles { get; }
         public DbSet<ResourceGroupRecord> ResourceGroups { get; }
+        public DbSet<ResourceGroupRoleRecord> ResourceGroupRoles { get; }
         public DbSet<ResourceRecord> Resources { get; }
+        public DbSet<ResourceRoleRecord> ResourceRoles { get; }
         public DbSet<ModifierCategoryRecord> ModifierCategories { get; }
         public DbSet<ModifierCategoryAdminRecord> ModifierCategoryAdmins { get; }
         public DbSet<ModifierRecord> Modifiers { get; }
