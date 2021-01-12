@@ -22,7 +22,7 @@ namespace MainDB.Extensions
                 var connectionString = new MainConnectionString(appDbOptions, hostEnvironment.EnvironmentName).Value();
                 options
                     .UseSqlServer(connectionString, b => b.MigrationsAssembly("MainDB.EF.SqlServer"));
-                if (hostEnvironment.IsDevOrTest())
+                if (hostEnvironment?.IsDevOrTest() == true)
                 {
                     options.EnableSensitiveDataLogging();
                 }

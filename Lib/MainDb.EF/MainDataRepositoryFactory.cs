@@ -42,8 +42,14 @@ namespace MainDB.EF
         public DataRepository<ResourceGroupRecord> CreateResourceGroups()
             => new EfDataRepository<ResourceGroupRecord>(unitOfWork, mainDbContext, mainDbContext.ResourceGroups);
 
+        public DataRepository<ResourceGroupRoleRecord> CreateResourceGroupRoles()
+            => new EfDataRepository<ResourceGroupRoleRecord>(unitOfWork, mainDbContext, mainDbContext.ResourceGroupRoles);
+
         public DataRepository<ResourceRecord> CreateResources()
             => new EfDataRepository<ResourceRecord>(unitOfWork, mainDbContext, mainDbContext.Resources);
+
+        public DataRepository<ResourceRoleRecord> CreateResourceRoles()
+            => new EfDataRepository<ResourceRoleRecord>(unitOfWork, mainDbContext, mainDbContext.ResourceRoles);
 
         public DataRepository<ModifierCategoryRecord> CreateModifierCategories()
             => new EfDataRepository<ModifierCategoryRecord>(unitOfWork, mainDbContext, mainDbContext.ModifierCategories);
@@ -56,5 +62,6 @@ namespace MainDB.EF
 
         public DataRepository<AppUserModifierRecord> CreateUserModifiers()
             => new EfDataRepository<AppUserModifierRecord>(unitOfWork, mainDbContext, mainDbContext.UserModifiers);
+
     }
 }
