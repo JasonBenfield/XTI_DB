@@ -31,7 +31,7 @@ function DB-Xti-StartIssue {
 
 function DB-New-XtiVersion {
     param(
-        [Parameter(Position=0)]
+        [Mandatory, Parameter(Position=0)]
         [ValidateSet("major", "minor", "patch")]
         $VersionType,
         [ValidateSet("Development", "Production", "Staging", "Test")]
