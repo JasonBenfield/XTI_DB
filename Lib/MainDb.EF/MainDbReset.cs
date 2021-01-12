@@ -5,16 +5,16 @@ namespace MainDB.EF
 {
     public sealed class MainDbReset
     {
-        private readonly MainDbContext appDbContext;
+        private readonly MainDbContext mainDbContext;
 
-        public MainDbReset(MainDbContext appDbContext)
+        public MainDbReset(MainDbContext mainDbContext)
         {
-            this.appDbContext = appDbContext;
+            this.mainDbContext = mainDbContext;
         }
 
         public async Task Run()
         {
-            await appDbContext.Database.ExecuteSqlRawAsync
+            await mainDbContext.Database.ExecuteSqlRawAsync
             (
                 @"
 exec sp_MSForEachTable 'IF OBJECT_ID(''?'') <> ISNULL(OBJECT_ID(''[dbo].[__EFMigrationsHistory]''),0) ALTER TABLE ? NOCHECK CONSTRAINT all';

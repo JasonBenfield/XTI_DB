@@ -6,5 +6,6 @@
         public int AppID { get; set; }
         public string Name { get; set; } = "";
         public int ModCategoryID { get; set; }
+        public bool IsAnonymousAllowed { get; set; }
     }
 }
