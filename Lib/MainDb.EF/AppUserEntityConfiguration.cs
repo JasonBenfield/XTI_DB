@@ -9,10 +9,29 @@ namespace MainDB.EF
         public void Configure(EntityTypeBuilder<AppUserRecord> builder)
         {
             builder.HasKey(u => u.ID);
-            builder.Property(u => u.ID).ValueGeneratedOnAdd();
-            builder.HasIndex(u => u.UserName).IsUnique();
-            builder.Property(u => u.UserName).HasMaxLength(100);
-            builder.Property(u => u.Password).HasMaxLength(100);
+            builder
+                .Property(u => u.ID)
+                .ValueGeneratedOnAdd();
+            builder
+                .HasIndex(u => u.UserName)
+                .IsUnique();
+            builder
+                .Property(u => u.UserName)
+                .HasMaxLength(100);
+            builder
+                .Property(u => u.Password)
+                .HasMaxLength(100);
+            builder
+                .Property(u => u.Name)
+                .HasMaxLength(100)
+                .HasDefaultValue("");
+            builder
+                .HasIndex(u => u.Email)
+                .IsUnique();
+            builder
+                .Property(u => u.Email)
+                .HasMaxLength(100)
+                .HasDefaultValue("");
         }
     }
 }
