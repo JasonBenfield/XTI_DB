@@ -23,15 +23,10 @@ namespace MainDB.EF
                 .HasMaxLength(100);
             builder
                 .Property(u => u.Name)
-                .HasMaxLength(100)
-                .HasDefaultValue("");
-            builder
-                .HasIndex(u => u.Email)
-                .IsUnique();
+                .HasMaxLength(100);
             builder
                 .Property(u => u.Email)
-                .HasMaxLength(100)
-                .HasDefaultValue("");
+                .HasMaxLength(100);
         }
     }
 }
