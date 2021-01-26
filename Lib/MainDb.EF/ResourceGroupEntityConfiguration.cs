@@ -12,13 +12,13 @@ namespace MainDB.EF
             builder.Property(g => g.ID).ValueGeneratedOnAdd();
             builder.Property(g => g.Name).HasMaxLength(100);
             builder
-                .HasIndex(g => new { g.AppID, g.Name })
+                .HasIndex(g => new { g.VersionID, g.Name })
                 .IsUnique();
             builder
-                .HasOne<AppRecord>()
+                .HasOne<AppVersionRecord>()
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict)
-                .HasForeignKey(g => g.AppID);
+                .HasForeignKey(g => g.VersionID);
             builder
                 .HasOne<ModifierCategoryRecord>()
                 .WithMany()

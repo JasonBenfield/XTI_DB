@@ -19,11 +19,6 @@ namespace MainDB.EF
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(r => r.SessionID);
             builder
-                .HasOne<AppVersionRecord>()
-                .WithMany()
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasForeignKey(r => r.VersionID);
-            builder
                 .HasOne<ResourceRecord>()
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict)
