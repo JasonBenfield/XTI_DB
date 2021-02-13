@@ -12,7 +12,7 @@ namespace MainDB.Extensions
 {
     public static class Extensions
     {
-        public static void AddAppDbContextForSqlServer(this IServiceCollection services, IConfiguration configuration)
+        public static void AddMainDbContextForSqlServer(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<DbOptions>(configuration.GetSection(DbOptions.DB));
             services.AddDbContext<MainDbContext>((sp, options) =>
@@ -31,7 +31,7 @@ namespace MainDB.Extensions
                     options.EnableSensitiveDataLogging(false);
                 }
             });
-            services.AddScoped<IMainDataRepositoryFactory, MainDataRepositoryFactory>();
+            services.AddScoped<IMainDbContext, MainDbContext>();
         }
     }
 }

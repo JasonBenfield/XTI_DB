@@ -17,6 +17,7 @@ namespace MainDB.EF
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(c => c.AppID);
+            builder.ToTable("ModifierCategories");
         }
     }
 }

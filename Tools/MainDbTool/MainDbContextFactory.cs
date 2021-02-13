@@ -19,7 +19,7 @@ namespace MainDbTool
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.Configure<MainDbToolOptions>(hostContext.Configuration);
-                    services.AddAppDbContextForSqlServer(hostContext.Configuration);
+                    services.AddMainDbContextForSqlServer(hostContext.Configuration);
                 })
                 .Build();
             var scope = host.Services.CreateScope();

@@ -21,7 +21,7 @@ namespace MainDbTool
                 {
                     services.Configure<MainDbToolOptions>(hostContext.Configuration);
                     services.Configure<DbOptions>(hostContext.Configuration.GetSection(DbOptions.DB));
-                    services.AddAppDbContextForSqlServer(hostContext.Configuration);
+                    services.AddMainDbContextForSqlServer(hostContext.Configuration);
                     services.AddScoped<MainDbReset>();
                     services.AddScoped<MainDbBackup>();
                     services.AddScoped<MainDbRestore>();

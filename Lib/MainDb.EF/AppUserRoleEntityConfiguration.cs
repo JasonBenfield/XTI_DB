@@ -20,6 +20,7 @@ namespace MainDB.EF
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(ur => ur.RoleID);
+            builder.ToTable("UserRoles");
         }
     }
 }

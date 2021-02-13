@@ -20,6 +20,7 @@ namespace MainDB.EF
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(e => e.RequestID);
+            builder.ToTable("Events");
         }
     }
 }

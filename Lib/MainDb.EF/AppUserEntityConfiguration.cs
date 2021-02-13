@@ -27,6 +27,7 @@ namespace MainDB.EF
             builder
                 .Property(u => u.Email)
                 .HasMaxLength(100);
+            builder.ToTable("Users");
         }
     }
 }

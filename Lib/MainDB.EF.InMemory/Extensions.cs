@@ -8,7 +8,7 @@ namespace MainDB.Extensions
 {
     public static class Extensions
     {
-        public static void AddAppDbContextForInMemory(this IServiceCollection services)
+        public static void AddMainDbContextForInMemory(this IServiceCollection services)
         {
             services.AddDbContext<MainDbContext>(options =>
             {
@@ -16,7 +16,7 @@ namespace MainDB.Extensions
                     .UseInMemoryDatabase(Guid.NewGuid().ToString())
                     .EnableSensitiveDataLogging();
             });
-            services.AddScoped<IMainDataRepositoryFactory, MainDataRepositoryFactory>();
+            services.AddScoped<IMainDbContext, MainDbContext>();
         }
     }
 }

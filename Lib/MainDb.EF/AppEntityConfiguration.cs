@@ -15,6 +15,7 @@ namespace MainDB.EF
             builder.Property(a => a.Title)
                 .HasMaxLength(100)
                 .HasDefaultValue("");
+            builder.ToTable("Apps");
         }
     }
 }

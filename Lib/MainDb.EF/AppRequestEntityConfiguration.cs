@@ -28,6 +28,7 @@ namespace MainDB.EF
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(r => r.ModifierID);
+            builder.ToTable("Requests");
         }
     }
 }

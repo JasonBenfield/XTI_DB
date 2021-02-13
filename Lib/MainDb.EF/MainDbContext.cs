@@ -1,29 +1,36 @@
 ﻿using MainDB.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
+using XTI_Core;
+using XTI_Core.EF;
 
 namespace MainDB.EF
 {
-    public sealed class MainDbContext : DbContext
+    public sealed class MainDbContext : DbContext, IMainDbContext
     {
+        private readonly UnitOfWork unitOfWork;
+
         public MainDbContext(DbContextOptions options)
             : base(options)
         {
-            Users = Set<AppUserRecord>();
-            Sessions = Set<AppSessionRecord>();
-            Requests = Set<AppRequestRecord>();
-            Events = Set<AppEventRecord>();
-            Apps = Set<AppRecord>();
-            Versions = Set<AppVersionRecord>();
-            Roles = Set<AppRoleRecord>();
-            UserRoles = Set<AppUserRoleRecord>();
-            ResourceGroups = Set<ResourceGroupRecord>();
-            ResourceGroupRoles = Set<ResourceGroupRoleRecord>();
-            Resources = Set<ResourceRecord>();
-            ResourceRoles = Set<ResourceRoleRecord>();
-            ModifierCategories = Set<ModifierCategoryRecord>();
-            ModifierCategoryAdmins = Set<ModifierCategoryAdminRecord>();
-            Modifiers = Set<ModifierRecord>();
-            UserModifiers = Set<AppUserModifierRecord>();
+            Users = new EfDataRepository<AppUserRecord>(this);
+            Sessions = new EfDataRepository<AppSessionRecord>(this);
+            Requests = new EfDataRepository<AppRequestRecord>(this);
+            Events = new EfDataRepository<AppEventRecord>(this);
+            Apps = new EfDataRepository<AppRecord>(this);
+            Versions = new EfDataRepository<AppVersionRecord>(this);
+            Roles = new EfDataRepository<AppRoleRecord>(this);
+            UserRoles = new EfDataRepository<AppUserRoleRecord>(this);
+            ResourceGroups = new EfDataRepository<ResourceGroupRecord>(this);
+            ResourceGroupRoles = new EfDataRepository<ResourceGroupRoleRecord>(this);
+            Resources = new EfDataRepository<ResourceRecord>(this);
+            ResourceRoles = new EfDataRepository<ResourceRoleRecord>(this);
+            ModifierCategories = new EfDataRepository<ModifierCategoryRecord>(this);
+            ModifierCategoryAdmins = new EfDataRepository<ModifierCategoryAdminRecord>(this);
+            Modifiers = new EfDataRepository<ModifierRecord>(this);
+            UserModifiers = new EfDataRepository<AppUserModifierRecord>(this);
+            unitOfWork = new UnitOfWork(this);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -47,21 +54,24 @@ namespace MainDB.EF
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<AppUserRecord> Users { get; }
-        public DbSet<AppSessionRecord> Sessions { get; }
-        public DbSet<AppRequestRecord> Requests { get; }
-        public DbSet<AppEventRecord> Events { get; }
-        public DbSet<AppRecord> Apps { get; }
-        public DbSet<AppVersionRecord> Versions { get; }
-        public DbSet<AppRoleRecord> Roles { get; }
-        public DbSet<AppUserRoleRecord> UserRoles { get; }
-        public DbSet<ResourceGroupRecord> ResourceGroups { get; }
-        public DbSet<ResourceGroupRoleRecord> ResourceGroupRoles { get; }
-        public DbSet<ResourceRecord> Resources { get; }
-        public DbSet<ResourceRoleRecord> ResourceRoles { get; }
-        public DbSet<ModifierCategoryRecord> ModifierCategories { get; }
-        public DbSet<ModifierCategoryAdminRecord> ModifierCategoryAdmins { get; }
-        public DbSet<ModifierRecord> Modifiers { get; }
-        public DbSet<AppUserModifierRecord> UserModifiers { get; }
+        public DataRepository<AppUserRecord> Users { get; }
+        public DataRepository<AppSessionRecord> Sessions { get; }
+        public DataRepository<AppRequestRecord> Requests { get; }
+        public DataRepository<AppEventRecord> Events { get; }
+        public DataRepository<AppRecord> Apps { get; }
+        public DataRepository<AppVersionRecord> Versions { get; }
+        public DataRepository<AppRoleRecord> Roles { get; }
+        public DataRepository<AppUserRoleRecord> UserRoles { get; }
+        public DataRepository<ResourceGroupRecord> ResourceGroups { get; }
+        public DataRepository<ResourceGroupRoleRecord> ResourceGroupRoles { get; }
+        public DataRepository<ResourceRecord> Resources { get; }
+        public DataRepository<ResourceRoleRecord> ResourceRoles { get; }
+        public DataRepository<ModifierCategoryRecord> ModifierCategories { get; }
+        public DataRepository<ModifierCategoryAdminRecord> ModifierCategoryAdmins { get; }
+        public DataRepository<ModifierRecord> Modifiers { get; }
+        public DataRepository<AppUserModifierRecord> UserModifiers { get; }
+
+        public Task Transaction(Func<Task> action) => unitOfWork.Execute(action);
+
     }
 }
