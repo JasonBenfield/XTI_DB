@@ -20,6 +20,7 @@ namespace MainDB.EF
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(s => s.UserID);
+            builder.ToTable("Sessions");
         }
     }
 }

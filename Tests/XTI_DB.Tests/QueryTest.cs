@@ -20,6 +20,7 @@ namespace XTI_DB.Tests
             var input = setup();
             var timeRange = TimeRange.Between(DateTime.Now.Date, DateTime.Now.AddHours(1));
             var requests = await input.MainDbContext.Requests
+                .Retrieve()
                 .Where(r => r.TimeStarted >= timeRange.Start && r.TimeStarted <= timeRange.End)
                 .ToArrayAsync();
             Console.WriteLine(requests.Length);
@@ -40,7 +41,7 @@ namespace XTI_DB.Tests
                 (
                     (hostContext, services) =>
                     {
-                        services.AddAppDbContextForSqlServer(hostContext.Configuration);
+                        services.AddMainDbContextForSqlServer(hostContext.Configuration);
                     }
                 )
                 .Build();

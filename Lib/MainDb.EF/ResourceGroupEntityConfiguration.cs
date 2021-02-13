@@ -24,6 +24,7 @@ namespace MainDB.EF
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(g => g.ModCategoryID);
+            builder.ToTable("ResourceGroups");
         }
     }
 }
