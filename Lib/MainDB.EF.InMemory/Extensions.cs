@@ -16,7 +16,7 @@ namespace MainDB.Extensions
                     .UseInMemoryDatabase(Guid.NewGuid().ToString())
                     .EnableSensitiveDataLogging();
             });
-            services.AddScoped<IMainDbContext, MainDbContext>();
+            services.AddScoped<IMainDbContext>(sp => sp.GetService<MainDbContext>());
         }
     }
 }

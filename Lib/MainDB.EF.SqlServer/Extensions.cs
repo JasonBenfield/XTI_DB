@@ -31,7 +31,7 @@ namespace MainDB.Extensions
                     options.EnableSensitiveDataLogging(false);
                 }
             });
-            services.AddScoped<IMainDbContext, MainDbContext>();
+            services.AddScoped<IMainDbContext>(sp => sp.GetService<MainDbContext>());
         }
     }
 }
