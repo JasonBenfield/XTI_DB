@@ -11,7 +11,7 @@ namespace MainDB.EF
     {
         private readonly UnitOfWork unitOfWork;
 
-        public MainDbContext(DbContextOptions options)
+        public MainDbContext(DbContextOptions<MainDbContext> options)
             : base(options)
         {
             Users = new EfDataRepository<AppUserRecord>(this);
