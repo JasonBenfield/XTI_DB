@@ -9,7 +9,6 @@ namespace MainDB.Entities
         DataRepository<AppRecord> Apps { get; }
         DataRepository<AppEventRecord> Events { get; }
         DataRepository<ModifierCategoryRecord> ModifierCategories { get; }
-        DataRepository<ModifierCategoryAdminRecord> ModifierCategoryAdmins { get; }
         DataRepository<ModifierRecord> Modifiers { get; }
         DataRepository<AppRequestRecord> Requests { get; }
         DataRepository<ResourceGroupRoleRecord> ResourceGroupRoles { get; }
@@ -18,7 +17,6 @@ namespace MainDB.Entities
         DataRepository<ResourceRecord> Resources { get; }
         DataRepository<AppRoleRecord> Roles { get; }
         DataRepository<AppSessionRecord> Sessions { get; }
-        DataRepository<AppUserModifierRecord> UserModifiers { get; }
         DataRepository<AppUserRoleRecord> UserRoles { get; }
         DataRepository<AppUserRecord> Users { get; }
         DataRepository<AppVersionRecord> Versions { get; }
