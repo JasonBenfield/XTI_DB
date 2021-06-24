@@ -27,9 +27,7 @@ namespace MainDB.EF
             Resources = new EfDataRepository<ResourceRecord>(this);
             ResourceRoles = new EfDataRepository<ResourceRoleRecord>(this);
             ModifierCategories = new EfDataRepository<ModifierCategoryRecord>(this);
-            ModifierCategoryAdmins = new EfDataRepository<ModifierCategoryAdminRecord>(this);
             Modifiers = new EfDataRepository<ModifierRecord>(this);
-            UserModifiers = new EfDataRepository<AppUserModifierRecord>(this);
             unitOfWork = new UnitOfWork(this);
         }
 
@@ -48,9 +46,7 @@ namespace MainDB.EF
             modelBuilder.ApplyConfiguration(new ResourceEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceRoleEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ModifierCategoryEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new ModifierCategoryAdminEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ModifierEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new AppUserModifierEntityConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 
@@ -67,9 +63,7 @@ namespace MainDB.EF
         public DataRepository<ResourceRecord> Resources { get; }
         public DataRepository<ResourceRoleRecord> ResourceRoles { get; }
         public DataRepository<ModifierCategoryRecord> ModifierCategories { get; }
-        public DataRepository<ModifierCategoryAdminRecord> ModifierCategoryAdmins { get; }
         public DataRepository<ModifierRecord> Modifiers { get; }
-        public DataRepository<AppUserModifierRecord> UserModifiers { get; }
 
         public Task Transaction(Func<Task> action) => unitOfWork.Execute(action);
 
