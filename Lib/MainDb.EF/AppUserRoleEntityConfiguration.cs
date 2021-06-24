@@ -16,6 +16,11 @@ namespace MainDB.EF
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(ur => ur.UserID);
             builder
+                .HasOne<ModifierRecord>()
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasForeignKey(ur => ur.ModifierID);
+            builder
                 .HasOne<AppRoleRecord>()
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict)
