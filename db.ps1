@@ -5,69 +5,44 @@ $script:dbConfig = [PSCustomObject]@{
     RepoName = "XTI_DB"
     AppName = "XTI_DB"
     AppType = "Package"
-    ProjectDir = ""
 }
 
-function DB-New-XtiIssue {
+function DB-NewVersion {
+    param(
+        [Parameter(Position=0,Mandatory)]
+        [ValidateSet("major", "minor", "patch")]
+        $VersionType
+    )
+    $script:dbConfig | New-XtiVersion @PsBoundParameters
+}
+
+function DB-NewIssue {
     param(
         [Parameter(Mandatory, Position=0)]
         [string] $IssueTitle,
-        $Labels = @(),
-        [string] $Body = "",
         [switch] $Start
     )
     $script:dbConfig | New-XtiIssue @PsBoundParameters
 }
 
-function DB-Xti-StartIssue {
+function DB-StartIssue {
     param(
         [Parameter(Position=0)]
-        [long]$IssueNumber = 0,
-        $IssueBranchTitle = "",
-        $AssignTo = ""
+        [long]$IssueNumber = 0
     )
     $script:dbConfig | Xti-StartIssue @PsBoundParameters
 }
 
-function DB-New-XtiVersion {
-    param(
-        [Parameter(Position=0,Mandatory)]
-        [ValidateSet("major", "minor", "patch")]
-        $VersionType,
-        [ValidateSet("Development", "Production", "Staging", "Test")]
-        $EnvName = "Production"
-    )
-    $script:dbConfig | New-XtiVersion @PsBoundParameters
-}
-
-function DB-Xti-Merge {
-    param(
-        [Parameter(Position=0)]
-        [string] $CommitMessage
-    )
-    $script:dbConfig | Xti-Merge @PsBoundParameters
-}
-
-function DB-New-XtiPullRequest {
-    param(
-        [Parameter(Position=0)]
-        [string] $CommitMessage
-    )
-    $script:dbConfig | New-XtiPullRequest @PsBoundParameters
-}
-
-function DB-Xti-PostMerge {
+function DB-CompleteIssue {
     param(
     )
-    $script:dbConfig | Xti-PostMerge @PsBoundParameters
+    $script:dbConfig | Xti-CompleteIssue @PsBoundParameters
 }
 
 function DB-Publish {
     param(
-        [switch] $Prod
+        [ValidateSet("Development", "Production", "Staging", "Test")]
+        $EnvName = "Development"
     )
-    $script:dbConfig | Xti-PublishPackage @PsBoundParameters
-    if($Prod) {
-        $script:dbConfig | Xti-Merge
-    }
+    $script:dbConfig | Xti-Publish @PsBoundParameters
 }

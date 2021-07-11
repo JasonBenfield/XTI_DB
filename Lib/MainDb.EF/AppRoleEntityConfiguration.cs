@@ -1,6 +1,7 @@
 ﻿using MainDB.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace MainDB.EF
 {
@@ -11,6 +12,7 @@ namespace MainDB.EF
             builder.HasKey(r => r.ID);
             builder.Property(r => r.ID).ValueGeneratedOnAdd();
             builder.Property(r => r.Name).HasMaxLength(100);
+            builder.Property(r => r.TimeDeactivated).HasDefaultValue(DateTimeOffset.MaxValue);
             builder
                 .HasIndex(r => new { r.AppID, r.Name })
                 .IsUnique();
